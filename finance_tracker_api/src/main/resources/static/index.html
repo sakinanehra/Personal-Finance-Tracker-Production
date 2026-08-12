@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-icon">💰</div>
+                <h1>Finance Tracker Pro</h1>
+                <p>Manage your finances with confidence</p>
+            </div>
+
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="loginName">Full Name</label>
+                    <input type="text" id="loginName" placeholder="Enter your name" class="input-field">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginAcc">Account Number</label>
+                    <input type="text" id="loginAcc" placeholder="Enter account number (min 4 digits)" class="input-field">
+                </div>
+
+                <button id="loginBtn" class="btn btn-primary btn-block">Login to Dashboard</button>
+
+                <div class="login-info">
+                    <p><strong>Demo Mode:</strong> Enter any name and a 4-digit account number to get started.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Page -->
+    <div id="appPage" style="display:none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <div class="logo-icon-small">💰</div>
+                    <div class="header-title">
+                        <h2>Finance Tracker Pro</h2>
+                        <p id="userName" class="header-subtitle">Welcome User</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <p id="accountNumber" class="account-info">Account: 0000</p>
+                    <button id="logout" class="btn btn-outline">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-container">
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon income-icon">📈</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Total Deposit</p>
+                        <p id="totaldeposit" class="stat-value income">Total Deposit: 0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon expense-icon">📉</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Total Withdraw</p>
+                        <p id="totalwithdraw" class="stat-value expense">Total Withdraw: 0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon balance-icon">💳</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Current Balance</p>
+                        <p id="balance" class="stat-value balance">Balance: 0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon monthly-icon">📅</div>
+                    <div class="stat-content">
+                        <p class="stat-label">This Month</p>
+                        <p id="monthlyExpense" class="stat-value">This Month Expense: 0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Grid -->
+            <div class="main-grid">
+                <!-- Left Column: Add Transaction -->
+                <section class="card-section">
+                    <h3 class="section-title">Add Transaction</h3>
+
+                    <div class="transaction-tabs">
+                        <button class="tab-btn active" data-tab="income">➕ Income</button>
+                        <button class="tab-btn" data-tab="expense">➖ Expense</button>
+                    </div>
+
+                    <!-- Income Section -->
+                    <div class="income-box tab-content active" data-tab="income">
+                        <h4>Add Income</h4>
+                        <input type="number" id="incomeAmount" placeholder="Enter Amount" class="input-field">
+                        <select id="income-category" class="input-field">
+                            <option value="salary">Salary</option>
+                            <option value="freelancing">Freelance</option>
+                            <option value="investment">Investment</option>
+                            <option value="bonus">Bonus</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <button id="addIncome" class="btn btn-success btn-block">Add Income</button>
+                    </div>
+
+                    <!-- Expense Section -->
+                    <div class="expense-box tab-content" data-tab="expense">
+                        <h4>Add Expenses</h4>
+                        <input type="number" id="expenseAmount" placeholder="Enter Amount" class="input-field">
+                        <select id="expense-category" class="input-field">
+                            <option value="food">Food</option>
+                            <option value="travel">Travel</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="savings">Savings</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <button id="addExpense" class="btn btn-danger btn-block">Add Expense</button>
+                    </div>
+                </section>
+
+                <!-- Right Column: Budget & Summary -->
+                <section class="card-section">
+                    <!-- Budget Section -->
+                    <div class="subsection">
+                        <h3 class="section-title">Monthly Budget</h3>
+                        <div class="budget-container">
+                            <div class="budget-display">
+                                <p id="budgetDisplay" class="budget-text">No Budget Set</p>
+                                <p id="budgetStatus" class="budget-status">-</p>
+                            </div>
+                            <input type="number" id="budgetInput" placeholder="Enter Budget Amount" class="input-field">
+                            <button id="setBudget" class="btn btn-primary btn-block">Set Budget</button>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="budget-progress">
+                            <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <p id="progressText" class="progress-text">Used 0 rs</p>
+                        </div>
+                    </div>
+
+                    <!-- Summary Section -->
+                    <div class="subsection">
+                        <h3 class="section-title">Summary</h3>
+                        <div class="summary-box">
+                            <p id="summaryIncome" class="summary-item income">Income: 0</p>
+                            <p id="summaryExpense" class="summary-item expense">Expense: 0</p>
+                            <p id="summarySavings" class="summary-item savings">Savings: 0</p>
+                        </div>
+                    </div>
+
+                    <!-- Category Totals -->
+                    <div class="subsection">
+                        <h3 class="section-title">Category Totals</h3>
+                        <div class="category-box">
+                            <div class="category-item" id="foodTotal">Food: 0 rs</div>
+                            <div class="category-item" id="travelTotal">Travel: 0 rs</div>
+                            <div class="category-item" id="shoppingTotal">Shopping: 0 rs</div>
+                            <div class="category-item" id="othersTotal">Others: 0 rs</div>
+                        </div>
+                        <p id="topCategory" class="top-category">Top Category: None</p>
+                    </div>
+                </section>
+            </div>
+
+            <section class="card-section full-width">
+                <h3 class="section-title">Financial Analytics</h3>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h4>Financial Health Score</h4>
+                        <div class="health-score">
+                            <div class="score-circle" id="healthScore">0%</div>
+                            <p id="healthStatus">No Data</p>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Spending Insights</h4>
+                        <div id="spendingInsights" class="insights-list">
+                            <p class="empty-state">No insights yet</p>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Monthly Trend</h4>
+                        <div id="monthlyTrend" class="trend-list">
+                         <p class="empty-state">No trend data</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Savings Goals Section -->
+            <section class="card-section full-width">
+                <div class="goals-header">
+                    <h3 class="section-title">Savings Goals</h3>
+                </div>
+                <div class="goals-input-section">
+                    <input type="text" id="goalName" placeholder="Goal Name (e.g., Vacation)" class="input-field">
+                    <input type="number" id="goalAmount" placeholder="Target Amount" class="input-field">
+                    <button id="addGoal" class="btn btn-primary">Add Goal</button>
+                </div>
+                <div id="goalsList" class="goals-list">
+                    <p class="empty-state">No goals set yet</p>
+                </div>
+                
+                <!-- Savings to Goals Linking Section -->
+                <div class="savings-allocation-section" style="margin-top: 30px; padding: 20px; background: #f0f9ff; border-radius: 10px; border-left: 4px solid #0284c7;">
+                    <h4 style="margin-bottom: 15px; color: #0c4a6e;">💰 Allocate Savings to Goal</h4>
+                    <p style="font-size: 13px; color: #0c4a6e; margin-bottom: 15px;">When you add a "Savings" expense, choose which goal to allocate it to:</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                        <select id="savingsGoalSelect" class="input-field" style="padding: 10px; border: 1px solid #bfdbfe; border-radius: 6px;">
+                            <option value="">-- Select Goal to Link --</option>
+                        </select>
+                        <button id="linkSavingsBtn" class="btn btn-primary" style="padding: 10px 20px;">Link Savings</button>
+                    </div>
+                    <p id="savingsLinkStatus" style="font-size: 12px; color: #0c4a6e; margin-top: 10px;"></p>
+                </div>
+            </section>
+
+            <!-- Recurring Transactions Section -->
+            <section class="card-section full-width">
+                <div class="recurring-header">
+                    <h3 class="section-title">Recurring Transactions</h3>
+                </div>
+                <div class="recurring-input-section">
+                    <input type="text" id="recurringName" placeholder="Description (e.g., Monthly Rent)" class="input-field">
+                    <input type="number" id="recurringAmount" placeholder="Amount" class="input-field">
+                    <select id="recurringType" class="input-field">
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                    <select id="recurringFrequency" class="input-field">
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                    <button id="addRecurring" class="btn btn-primary">Add Recurring</button>
+                </div>
+                <div id="recurringList" class="recurring-list">
+                    <p class="empty-state">No recurring transactions set</p>
+                </div>
+            </section>
+
+            <!-- Chart Section -->
+            <section class="card-section full-width">
+                <h3 class="section-title">Expense Breakdown</h3>
+                <div class="chart-container">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Transaction History Section -->
+            <section class="card-section full-width">
+                <div class="history-header">
+                    <h3 class="section-title">Transaction History</h3>
+                    <button id="clearAll" class="btn btn-danger">Clear All</button>
+                </div>
+
+                <!-- Search and Filters -->
+                <div class="filter-section">
+                    <input type="text" id="searchInput" placeholder="🔍 Search by category or amount..." class="input-field search-input">
+
+                    <div class="filter-buttons">
+                        <div class="filter-group">
+                            <span class="filter-label">Type:</span>
+                            <button id="showAll" class="btn btn-small">All</button>
+                            <button id="showdeposit" class="btn btn-small">Deposit</button>
+                            <button id="showwithdraw" class="btn btn-small">Withdraw</button>
+                        </div>
+
+                        <div class="filter-group">
+                            <span class="filter-label">Category:</span>
+                            <button id="all" class="btn btn-small">All</button>
+                            <button id="food" class="btn btn-small">Food</button>
+                            <button id="travel" class="btn btn-small">Travel</button>
+                            <button id="shopping" class="btn btn-small">Shopping</button>
+                            <button id="others" class="btn btn-small">Others</button>
+                        </div>
+
+                        <div class="filter-group">
+                            <span class="filter-label">Period:</span>
+                            <button id="filterweek" class="btn btn-small">Last 7 Days</button>
+                            <button id="filtermonth" class="btn btn-small">This Month</button>
+                            <button id="filterall" class="btn btn-small">All</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction List -->
+                <div class="transaction-list-container">
+                    <ul id="history" class="transaction-list">
+                        <p class="empty-state">No transactions yet</p>
+                    </ul>
+                </div>
+
+                <!-- Export Button -->
+                <div class="export-section">
+                    <button onclick="exportData()" class="btn btn-primary">📥 Export Data</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- API Service Layer -->
+    <script src="api-service.js"></script>
+    
+    <!-- Original Logic -->
+    <script src="logic.js"></script>
+    
+    <!-- Backend Integration Layer -->
+    <script src="backend-integration.js"></script>
+    
+    <!-- Tab Switching Script -->
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tab = this.getAttribute('data-tab');
+                // Remove active class from all buttons and contents
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active');
+                document.querySelector(`.tab-content[data-tab="${tab}"]`).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
