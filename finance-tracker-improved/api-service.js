@@ -10,7 +10,7 @@
  * - Proper error handling with status codes
  */
 
-const API_BASE_URL = 'http://localhost:8081/api/v1';
+const API_BASE_URL = 'https://personal-finance-tracker-production-production.up.railway.app/api/v1';
 
 // ============================================
 // UTILITY FUNCTIONS
